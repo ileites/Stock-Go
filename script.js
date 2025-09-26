@@ -473,7 +473,8 @@ async function saveEditedProduct() {
         if (difference !== 0) {
             try {
                 const movementType = difference > 0 ? 'Entrada' : 'Salida';
-                const movementDescription = difference > 0 ? 'Ajuste de stock (aumento)' : 'Ajuste de stock (reducción)';
+                const userName = sessionStorage.getItem('userName') || 'Desconocido';
+                const movementDescription = difference > 0 ? `Ajuste de stock (aumento) por ${userName}`: `Ajuste de stock (reducción) por ${userName}`;
                 const { error: movementError } = await supabase
                     .from('movements')
                     .insert({
